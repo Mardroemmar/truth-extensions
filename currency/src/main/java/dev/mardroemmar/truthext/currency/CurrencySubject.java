@@ -76,7 +76,7 @@ public class CurrencySubject extends Subject {
    * @see Currency#getDisplayName(Locale)
    */
   public StringSubject displayName(final Locale locale) {
-    return this.check("getDisplayName()").that(this.nonNull().getDisplayName(locale));
+    return this.check("getDisplayName(%s)", locale).that(this.nonNull().getDisplayName(locale));
   }
 
   /**
@@ -110,7 +110,7 @@ public class CurrencySubject extends Subject {
    * @see Currency#getSymbol(Locale)
    */
   public StringSubject symbol(final Locale locale) {
-    return this.check("getSymbol()").that(this.nonNull().getSymbol(locale));
+    return this.check("getSymbol(%s)", locale).that(this.nonNull().getSymbol(locale));
   }
 
   /**
