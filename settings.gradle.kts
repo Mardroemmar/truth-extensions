@@ -7,10 +7,10 @@ pluginManagement {
 
 rootProject.name = "truth-extensions"
 proj("bom")
+proj("currency")
 
 fun proj(path: String, name: String = "${rootProject.name}-${path.replace('/', '-')}") {
   include(path)
   val proj = project(":${path.replace('/', ':')}")
   proj.name = name
 }
-include("currency")
