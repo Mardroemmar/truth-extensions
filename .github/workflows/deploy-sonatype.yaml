@@ -1,0 +1,56 @@
+name: Deploy to Sonatype OSSRH
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: temurin
+        # Cache omitted on purpose: we want a _clean_ build.
+      - name: Test
+        run: ./gradlew test --no-daemon
+
+  deploy:
+    # We don't want to attempt deployment before we know tests pass.
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: temurin
+      - name: Determine whether to deploy to Central
+        id: snapshot-check
+        shell: bash
+        run: |
+          if ! cat ./build.gradle.kts | grep --regexp 'version\s*=\s*.*".*-SNAPSHOT"' 2>&1 >/dev/null ; then
+            echo "::set-output name=snapshot::false"
+          else
+            echo "::set-output name=snapshot::true"
+          fi
+      - name: Deploy to OSSRH
+        if: ${{ github.ref_type != 'tag' && steps.snapshot-check.outputs.snapshot == 'true' }}
+        run: ./gradlew -PforceSign=true publish --no-daemon
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.CENTRAL_SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.CENTRAL_SIGNING_KEY_PASSWORD }}
+      - name: Deploy to Central
+        if: ${{ github.ref_type == 'tag' && steps.snapshot-check.outputs.snapshot == 'false' }}
+        run: ./gradlew -PforceSign=true publish closeAndReleaseSonatypeStagingRepository --no-daemon
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.CENTRAL_SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.CENTRAL_SIGNING_KEY_PASSWORD }}

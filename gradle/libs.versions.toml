@@ -1,0 +1,27 @@
+[versions]
+gradle-plugin-indra = "2.0.6"
+gradle-plugin-testlog = "3.1.0"
+
+checker-qual = "3.21.1"
+apiguardian = "1.1.2"
+junit = "5.8.2"
+truth = "1.1.3"
+
+[libraries]
+gradle-plugin-indra = { module = "net.kyori:indra-common", version.ref = "gradle-plugin-indra" }
+gradle-plugin-indra-publishing = { module = "net.kyori:indra-publishing-sonatype", version.ref = "gradle-plugin-indra" }
+gradle-plugin-testlog = { module = "com.adarshr:gradle-test-logger-plugin", version.ref = "gradle-plugin-testlog" }
+
+checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checker-qual" }
+apiguardian = { module = "org.apiguardian:apiguardian-api", version.ref = "apiguardian" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+truth-java8 = { module = "com.google.truth.extensions:truth-java8-extension", version.ref = "truth" }
+
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+[bundles]
+
+[plugins]
+indra-publishing-sonatype = { id = "net.kyori.indra.publishing.sonatype", version.ref = "gradle-plugin-indra" }

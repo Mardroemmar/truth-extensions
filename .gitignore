@@ -1,0 +1,10 @@
+.gradle/
+build/
+
+.idea/
+*.iml
+.vscode/
+
+# macOS stuff
+.DS_Store
+._*

@@ -1,0 +1,16 @@
+name: Validate Gradle wrapper
+on:
+  push: {} # Always
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  validate:
+    name: Gradle wrapper validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
