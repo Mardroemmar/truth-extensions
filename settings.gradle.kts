@@ -8,6 +8,7 @@ pluginManagement {
 rootProject.name = "truth-extensions"
 proj("bom")
 proj("currency")
+proj("time")
 
 fun proj(path: String, name: String = "${rootProject.name}-${path.replace('/', '-')}") {
   include(path)

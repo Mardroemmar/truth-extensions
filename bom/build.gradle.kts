@@ -7,5 +7,6 @@ plugins {
 dependencies {
   constraints {
     api(projects.truthExtensionsCurrency)
+    api(projects.truthExtensionsTime)
   }
 }

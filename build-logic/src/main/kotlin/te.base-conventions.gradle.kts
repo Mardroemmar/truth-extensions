@@ -31,6 +31,10 @@ tasks {
     options.compilerArgs.add("-parameters")
   }
 
+  test {
+    systemProperty("com.google.common.truth.disable_stack_trace_cleaning", "true")
+  }
+
   javadoc {
     val opt = options as StandardJavadocDocletOptions
     opt.addStringOption("Xdoclint:none", "-quiet")
