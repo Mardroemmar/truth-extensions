@@ -1,0 +1,116 @@
+= truth-extensions
+Mariell Hoversholm <mariell@mardroemmar.dev>
+v1.0, 2022-01-11
+:current-version: 0.1.0
+
+A library for common extensions for link:https://truth.dev[Truth].
+
+== Usage
+
+=== Repository
+
+To depend on a release, you need only depend on the official Maven central, or a mirror thereof.
+If you're using Maven, this is automatic.
+Gradle users must:
+
+.build.gradle.kts
+[source,kotlin]
+----
+repositories {
+    mavenCentral()
+}
+----
+
+To depend on a `SNAPSHOT` version, you need to depend on the Sonatype snapshot repository:
+
+.pom.xml
+[source,xml]
+----
+<repositories>
+  <repository>
+    <id>sonatype-oss-snapshot</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+----
+
+.build.gradle.kts
+[source,kotlin]
+----
+repositories {
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
+}
+----
+
+=== Artifact
+
+You may want to depend upon the link:./bom[bill-of-materials] for the library as follows:
+
+.pom.xml
+[source,xml,subs="+attributes"]
+----
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>dev.mardroemmar</groupId>
+      <artifactId>truth-extensions-bom</artifactId>
+      <version>{current-version}</version>
+      <classifier>pom</classifier>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+----
+
+.build.gradle.kts
+[source,kotlin,subs="+attributes"]
+----
+dependencies {
+    enforcedPlatform("dev.mardroemmar:truth-extensions-bom:{current-version}")
+}
+----
+
+=== Modules
+
+==== `truth-extensions-currency`
+
+The `truth-extensions-currency` module provides `java.util.Currency`-related extensions.
+
+You may depend on it as follows, assuming you use the bill-of-materials:
+
+.pom.xml
+[source,xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>dev.mardroemmar</groupId>
+    <artifactId>truth-extensions-currency</artifactId>
+  </dependency>
+</dependencies>
+----
+
+.build.gradle.kts
+[source,kotlin]
+----
+dependencies {
+    testImplementation("dev.mardroemmar:truth-extensions-currency")
+    // or other scopes if you'd prefer.
+}
+----
+
+=== Java
+
+This project currently uses Java 8. The project has a policy of supporting at least the 2 newest long-term-support (LTS) versions of Java: any older versions are always subject to be removed in a MAJOR version bump.
+This means that e.g. version `1.0.0` with Java 8 will never drop Java 8, but rather bump to `2.0.0` along with moving to Java 11. This does not necessarily mean there are plans for this; see the issue tracker for more information on future plans.
+
+== Licence
+
+This project is licensed under the link:https://choosealicense.com/licenses/mit/[MIT licence].
+Because of this, the project is freely distributable and usable, both by proprietary and free (as in libre) software.
+You need not ask for permission to use the project in any way; all usages are welcome within the terms of the licence.
