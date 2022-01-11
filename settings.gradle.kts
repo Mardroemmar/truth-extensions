@@ -13,3 +13,4 @@ fun proj(path: String, name: String = "${rootProject.name}-${path.replace('/', '
   val proj = project(":${path.replace('/', ':')}")
   proj.name = name
 }
+include("currency")
