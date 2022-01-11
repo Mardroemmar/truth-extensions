@@ -6,5 +6,6 @@ plugins {
 
 dependencies {
   constraints {
+    api(projects.truthExtensionsCurrency)
   }
 }
