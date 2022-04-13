@@ -46,12 +46,12 @@ class LocalDateTimeSubjectTest {
   @Test
   void isComparativelyNotEqualTo() {
     final LocalDateTime actual = LocalDateTime.ofEpochSecond(5, 0, ZoneOffset.UTC);
-    LocalDateTimeSubject.assertThat(actual).isComparativelyEqualTo(actual);
-    assertThrows(AssertionError.class, () -> LocalDateTimeSubject.assertThat(actual)
+    LocalDateTimeSubject.assertThat(actual)
         // The Thai Buddhist calendar starts at around 543 BC. Therefore, Gregorian 1970 (the Epoch year), should be Thai year 2484.
-        .isComparativelyNotEqualTo(ThaiBuddhistDate.of(1970 + 543, 1, 1).atTime(LocalTime.ofSecondOfDay(5))));
-    assertThrows(AssertionError.class, () -> LocalDateTimeSubject.assertThat(actual).isComparativelyNotEqualTo(actual.plusNanos(1L)));
-    assertThrows(AssertionError.class, () -> LocalDateTimeSubject.assertThat(actual).isComparativelyEqualTo(actual.minusNanos(1L)));
+        .isComparativelyNotEqualTo(ThaiBuddhistDate.of(1970 + 543, 1, 1).atTime(LocalTime.ofSecondOfDay(5)));
+    LocalDateTimeSubject.assertThat(actual).isComparativelyNotEqualTo(actual.plusNanos(1L));
+    LocalDateTimeSubject.assertThat(actual).isComparativelyNotEqualTo(actual.minusNanos(1L));
+    assertThrows(AssertionError.class, () -> LocalDateTimeSubject.assertThat(actual).isComparativelyNotEqualTo(actual));
   }
 
   @Test
