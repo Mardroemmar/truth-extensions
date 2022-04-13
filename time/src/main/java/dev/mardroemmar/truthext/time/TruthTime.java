@@ -2,6 +2,7 @@ package dev.mardroemmar.truthext.time;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZonedDateTime;
 import org.apiguardian.api.API;
@@ -60,5 +61,16 @@ public final class TruthTime {
    */
   public static ZonedDateTimeSubject assertThat(final @Nullable ZonedDateTime actual) {
     return ZonedDateTimeSubject.assertThat(actual);
+  }
+
+  /**
+   * Assert upon a {@link LocalDateTime}. Alias for {@link LocalDateTimeSubject#assertThat(LocalDateTime)}.
+   *
+   * @param actual the actual to assert upon
+   * @return a new subject for asserting
+   * @see LocalDateTimeSubject#assertThat(LocalDateTime)
+   */
+  public static LocalDateTimeSubject assertThat(final @Nullable LocalDateTime actual) {
+    return LocalDateTimeSubject.assertThat(actual);
   }
 }

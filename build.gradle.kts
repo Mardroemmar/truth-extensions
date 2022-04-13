@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.mardroemmar"
-version = "0.4.0"
+version = "1.0.0"
 description = "Commonly wanted extensions for Truth."
 
 indraSonatype {
