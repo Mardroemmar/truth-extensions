@@ -1,6 +1,5 @@
 name: Validate Gradle wrapper
 on:
-  push: {} # Always
   pull_request:
     types:
       - opened
