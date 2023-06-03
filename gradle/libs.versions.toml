@@ -2,7 +2,7 @@
 gradle-plugin-indra = "2.1.1"
 gradle-plugin-testlog = "3.2.0"
 
-checker-qual = "3.22.0"
+checker-qual = "3.35.0"
 apiguardian = "1.1.2"
 junit = "5.8.2"
 truth = "1.1.3"
