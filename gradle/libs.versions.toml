@@ -1,5 +1,5 @@
 [versions]
-gradle-plugin-indra = "2.1.1"
+gradle-plugin-indra = "2.2.0"
 gradle-plugin-testlog = "3.2.0"
 
 checker-qual = "3.22.0"
